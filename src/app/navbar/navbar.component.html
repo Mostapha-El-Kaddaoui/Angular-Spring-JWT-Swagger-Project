@@ -1,0 +1,52 @@
+<div class="font-sans">
+  <nav class="bg-gradient-to-r from-blue-950 via-indigo-900 to-purple-950 shadow-lg">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex shrink-0 items-center">
+            <img class="h-8 w-auto transition-opacity hover:opacity-80" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+          </div>
+          <div class="hidden sm:ml-8 sm:block">
+            <div class="flex space-x-2">
+              <a routerLink="/home" class="rounded-lg bg-indigo-800 cursor-pointer px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 transition-colors duration-200" aria-current="page">Home</a>
+              <a routerLink="/admin/accounts" class="rounded-lg px-4 cursor-pointer py-2 text-sm font-semibold text-indigo-100 hover:bg-indigo-700 hover:text-white transition-colors duration-200">Accounts</a>
+              
+              <!-- Customers Dropdown -->
+              <div class="relative group">
+                <button class="flex items-center rounded-lg px-4 py-2 text-sm font-semibold text-indigo-100 hover:bg-indigo-700 hover:text-white transition-colors duration-200">
+                  Customers
+                  <svg class="ml-2 h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div class="absolute hidden group-hover:block bg-indigo-950 min-w-48 rounded-lg shadow-xl z-10 border border-indigo-800">
+                  <div class="py-1">
+                    <a routerLink="/admin/customers" class="block px-4 py-2 text-sm text-indigo-100 hover:bg-indigo-800 hover:text-white transition-colors duration-150">Search Customer</a>
+                    @if(this.authService.roles.includes("ADMIN")){
+                      <a routerLink="/admin/customers/new-customer" class="block px-4 py-2 text-sm text-indigo-100 hover:bg-indigo-800 hover:text-white transition-colors duration-150">Add New Customer</a>
+                    }
+                  </div>
+                </div>
+              </div>
+              
+              <a routerLink="/home" class="rounded-lg px-4 py-2 cursor-pointer text-sm font-semibold text-indigo-100 hover:bg-indigo-700 hover:text-white transition-colors duration-200">Operations</a>
+            </div>
+          </div>
+        </div>
+
+        @if(this.authService.isAuthenticated == true){
+          <div>
+            <h4 class="text-indigo-100 font-medium">
+              {{this.authService.username}}
+            </h4>
+          </div>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <button (click)="handleLogout()" type="button" class="cursor-pointer bg-indigo-100 rounded-full p-2 hover:bg-white transition-colors duration-200 shadow">
+              <svg xmlns="http://www.w3.org/2000/svg" class="fill-indigo-800 w-5 hover:fill-indigo-900 transition-colors" viewBox="0 0 512 512"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/></svg>
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </nav>
+</div>

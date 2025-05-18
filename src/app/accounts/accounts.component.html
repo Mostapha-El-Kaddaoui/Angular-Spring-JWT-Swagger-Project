@@ -1,0 +1,88 @@
+<div class="p-6 bg-gradient-to-b from-slate-900 to-gray-900 min-h-screen">
+  <!-- Search Form -->
+  <form class="flex flex-col md:flex-row items-center gap-4 p-6 bg-gray-800 rounded-lg shadow-lg"
+        [formGroup]="searchFormGroup"
+        (ngSubmit)="handleSearchAccount()">
+    
+    <label for="accid" class="text-white font-semibold text-lg whitespace-nowrap">
+      🔍 Account ID:
+    </label>
+
+    <input
+      type="text"
+      id="accid"
+      formControlName="accountId"
+      placeholder="Search account..."
+      class="flex-1 w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-gray-300 transition-all"
+      autocomplete="off">
+
+    <button
+      type="submit"
+      class="px-6 py-2 font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-md hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition">
+      Search
+    </button>
+  </form>
+
+  <!-- Account Details -->
+  @if(accountObservable$ | async; as accountDetails) {
+    <div class="mt-8 bg-gray-800 text-white rounded-lg p-6 shadow-xl w-full max-w-3xl mx-auto space-y-4">
+      <div class="flex items-center gap-2">
+        <h4 class="font-bold text-xl text-indigo-400">Account ID:</h4>
+        <span class="text-xl">{{ accountDetails.accountId }}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <h4 class="font-bold text-xl text-indigo-400">Balance:</h4>
+        <span class="text-xl">{{ accountDetails.balance }}</span>
+      </div>
+    </div>
+
+    <!-- Table of Operations -->
+    <div class="overflow-x-auto mt-6">
+      <table class="w-full text-sm text-left text-gray-300 bg-gray-900 rounded-lg overflow-hidden">
+        <thead class="text-xs uppercase bg-gray-700 text-indigo-300">
+          <tr>
+            <th class="px-6 py-3">ID</th>
+            <th class="px-6 py-3">Date</th>
+            <th class="px-6 py-3">Amount</th>
+            <th class="px-6 py-3">Type</th>
+            <th class="px-6 py-3">Description</th>
+            <th class="px-6 py-3">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (a of accountDetails.accountOperationDTOS; track a.id) {
+            <tr class="border-t border-gray-700 bg-gray-800 hover:bg-gray-800 transition">
+              <td class="px-6 py-4">{{ a.id }}</td>
+              <td class="px-6 py-4">{{ a.operationDate }}</td>
+              <td class="px-6 py-4">{{ a.amount }}</td>
+              <td class="px-6 py-4 text-green-400 font-semibold">{{ a.type }}</td>
+              <td class="px-6 py-4">{{ a.description }}</td>
+              <td class="px-6 py-4">
+                <button class="p-2 bg-red-600 hover:bg-red-700 rounded-full transition">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor"
+                    class="w-5 h-5 text-white">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="m14.74 9-.346 9m-4.788 0L9.26 9M19.228 5.79a48.11 48.11 0 0 0-3.478-.397M4.772 5.79a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916A2.25 2.25 0 0 0 13.66 2.276a51.964 51.964 0 0 0-3.32 0A2.25 2.25 0 0 0 8.25 4.477v.916m7.5 0a48.67 48.67 0 0 0-7.5 0" />
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-6 flex justify-center">
+      <nav class="inline-flex gap-2" aria-label="Pagination">
+        @for (item of [].constructor(accountDetails.totalPages); track $index) {
+          <a (click)="gotoPage($index)"
+            class="px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded hover:bg-indigo-700 cursor-pointer transition">
+            {{ $index }}
+          </a>
+        }
+      </nav>
+    </div>
+  }
+</div>
