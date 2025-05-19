@@ -1,20 +1,19 @@
 # Tresorory Frontend (Angular)
 ## Composantes Overview
 src/app/
-├── accounts/                  → List and manage bank accounts
-├── admin-template/           → Admin layout template
-├── change-password/          → Change user password
-├── customers/                → List, search, create and delete customers
-├── guards/                   → Authentication & authorization guards
-├── home/                     → Landing/home page
-├── interceptors/             → HTTP interceptor to attach JWT tokens
-├── login/                    → Login form and logic
-├── model/                    → TypeScript models for accounts & customers
-├── navbar/                   → Navigation bar component
-├── new-customer/             → Form to create a new customer
-├── not-authorized/           → Unauthorized access component
-└── services/                 → Services for API communication
-
+├── accounts/ → Liste et gestion des comptes bancaires
+├── admin-template/ → Template de la mise en page admin
+├── change-password/ → Changement de mot de passe utilisateur
+├── customers/ → Liste, recherche, création et suppression de clients
+├── guards/ → Gardiens d'authentification et d'autorisation
+├── home/ → Page d'accueil / Landing page
+├── interceptors/ → Intercepteur HTTP pour ajouter le token JWT
+├── login/ → Formulaire de connexion et logique associée
+├── model/ → Modèles TypeScript pour comptes et clients
+├── navbar/ → Composant de la barre de navigation
+├── new-customer/ → Formulaire pour créer un nouveau client
+├── not-authorized/ → Composant d'accès non autorisé
+└── services/ → Services pour la communication avec l'API
 ---
 
 ## Partie Front-End avec Angular
