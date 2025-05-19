@@ -1,59 +1,132 @@
-# FrontEndEbanking
+# Tresorory Frontend (Angular)
+## Composantes Overview
+src/app/
+├── accounts/                  → List and manage bank accounts
+├── admin-template/           → Admin layout template
+├── change-password/          → Change user password
+├── customers/                → List, search, create and delete customers
+├── guards/                   → Authentication & authorization guards
+├── home/                     → Landing/home page
+├── interceptors/             → HTTP interceptor to attach JWT tokens
+├── login/                    → Login form and logic
+├── model/                    → TypeScript models for accounts & customers
+├── navbar/                   → Navigation bar component
+├── new-customer/             → Form to create a new customer
+├── not-authorized/           → Unauthorized access component
+└── services/                 → Services for API communication
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+---
 
-## Development server
+## Partie Front-End avec Angular
 
-To start a local development server, run:
+Le dossier `src/app` contient toute la logique de l'application Angular. Voici une description des principaux dossiers et fichiers présents :
 
-```bash
-ng serve
-```
+### Composants (components)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **accounts/**  
+  Composant dédié à la gestion des comptes bancaires (affichage, opérations, etc.).  
+  Contient : HTML, CSS, TypeScript, et tests.
 
-## Code scaffolding
+- **admin-template/**  
+  Composant servant de modèle (template) pour la partie administration de l’application.  
+  Gère la mise en page et le design commun.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **change-password/**  
+  Composant pour permettre aux utilisateurs de modifier leur mot de passe.
 
-```bash
-ng generate component component-name
-```
+- **customers/**  
+  Composant dédié à la gestion des clients (affichage liste clients, détails, etc.).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **home/**  
+  Page d'accueil de l'application, souvent le premier écran visible après connexion.
 
-```bash
-ng generate --help
-```
+- **login/**  
+  Composant pour la gestion de l’authentification (formulaire de connexion).
 
-## Building
+- **navbar/**  
+  Barre de navigation commune à toutes les pages.
 
-To build the project run:
+- **new-customer/**  
+  Formulaire pour créer un nouveau client.
 
-```bash
-ng build
-```
+- **not-authorized/**  
+  Page affichée lorsqu’un utilisateur tente d’accéder à une ressource pour laquelle il n’a pas les droits.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Services (services)
 
-## Running unit tests
+- **account.service.ts**  
+  Service pour gérer les appels API liés aux comptes bancaires.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **auth.service.ts**  
+  Service pour gérer l’authentification, les tokens JWT, etc.
 
-```bash
-ng test
-```
+- **customer.service.ts**  
+  Service pour gérer les appels API liés aux clients.
 
-## Running end-to-end tests
+Chaque service a son fichier de test (`*.spec.ts`).
 
-For end-to-end (e2e) testing, run:
+### Gardiens (guards)
 
-```bash
-ng e2e
-```
+- **authentication.guard.ts**  
+  Garde qui protège les routes nécessitant une connexion.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- **authorization.guard.ts**  
+  Garde qui protège les routes selon les rôles/utilisateur.
 
-## Additional Resources
+### Intercepteurs (interceptors)
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **app-http.interceptor.ts**  
+  Intercepteur HTTP pour ajouter automatiquement le token d'authentification aux requêtes sortantes, gérer les erreurs globalement, etc.
+
+### Modèles (model)
+
+- **account.model.ts**  
+  Définition des interfaces/types pour les comptes.
+
+- **customer.model.ts**  
+  Définition des interfaces/types pour les clients.
+
+### Fichiers racines
+
+- **app.component.ts / html / css**  
+  Composant racine de l’application.
+
+- **app.routes.ts**  
+  Fichier de configuration des routes Angular (définit la navigation dans l’application).
+
+- **app.config.ts**  
+  Configuration générale de l’application (exemple : constantes, URL API, etc.).
+
+- **main.ts**  
+  Point d’entrée principal qui lance l’application Angular.
+
+- **index.html**  
+  Page HTML principale qui charge l’application Angular.
+
+- **styles.css**  
+  Styles globaux applicables à toute l’application.
+
+---
+
+### 2.2. Interfaces
+
+#### Hero Page 
+![image](https://github.com/user-attachments/assets/0c725ed4-33c3-4c05-a6e6-ab8c99e887f8)
+
+#### Login Page  
+![image](https://github.com/user-attachments/assets/b625898b-768b-4d38-a16d-51ce43c264dd)
+
+#### Change Password Interface  
+![image](https://github.com/user-attachments/assets/6a5fcd4c-f75a-45c3-8872-3f34bb663053)
+
+#### Customer List, Search, and Delete  
+![image](https://github.com/user-attachments/assets/2bb1dcc4-5109-4f39-a7ac-db738c5e3fd2)
+![image](https://github.com/user-attachments/assets/129bdc33-8953-4da5-bd72-ca4638930ae6)
+
+#### Create Customer Form  
+![image](https://github.com/user-attachments/assets/e5ab082d-73cb-44a0-a61b-3dbcf8bb8d2b)
+![image](https://github.com/user-attachments/assets/8c305035-0ea1-4d85-8ada-1ea73f138933)
+
+#### Accounts List and Operations Get 
+![image](https://github.com/user-attachments/assets/b9f081f4-6692-489b-a450-cf9433988434)
+
