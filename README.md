@@ -3,7 +3,7 @@
 [Accéder à la branche Front-End](https://github.com/Mostapha-El-Kaddaoui/Angular-Spring-JWT-Swagger-Project/tree/Front-End)
 
 
-# Tresorory Management
+# Tresorory Management BackEND
 ---
 A comprehensive treasury management system designed to handle financial transactions securely and efficiently.
 
