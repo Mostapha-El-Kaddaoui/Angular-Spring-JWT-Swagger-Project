@@ -1,21 +1,8 @@
 # Tresorory Frontend (Angular)
 ## Composantes Overview
-src/app/
-├── accounts/ → Liste et gestion des comptes bancaires
-├── admin-template/ → Template de la mise en page admin
-├── change-password/ → Changement de mot de passe utilisateur
-├── customers/ → Liste, recherche, création et suppression de clients
-├── guards/ → Gardiens d'authentification et d'autorisation
-├── home/ → Page d'accueil / Landing page
-├── interceptors/ → Intercepteur HTTP pour ajouter le token JWT
-├── login/ → Formulaire de connexion et logique associée
-├── model/ → Modèles TypeScript pour comptes et clients
-├── navbar/ → Composant de la barre de navigation
-├── new-customer/ → Formulaire pour créer un nouveau client
-├── not-authorized/ → Composant d'accès non autorisé
-└── services/ → Services pour la communication avec l'API
----
+![image](https://github.com/user-attachments/assets/6aef8dff-e9c6-4752-8c1c-053da1eb23db)
 
+---
 ## Partie Front-End avec Angular
 
 Le dossier `src/app` contient toute la logique de l'application Angular. Voici une description des principaux dossiers et fichiers présents :
