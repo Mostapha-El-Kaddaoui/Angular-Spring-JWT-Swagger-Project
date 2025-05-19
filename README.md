@@ -101,7 +101,7 @@ Accept: application/json
 Authorization: Bearer Token
 ```
 ### La reponse : 
-![./image.png…]()
+![./image.png]()
 
 
 
