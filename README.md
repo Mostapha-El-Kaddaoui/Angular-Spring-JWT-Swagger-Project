@@ -101,7 +101,7 @@ Accept: application/json
 Authorization: Bearer Token
 ```
 ### La reponse : 
-![./image.png]()
+![](https://github.com/Mostapha-El-Kaddaoui/Angular-Spring-JWT-Swagger-Project/blob/Back-End/image.png?raw=true)
 
 
 
