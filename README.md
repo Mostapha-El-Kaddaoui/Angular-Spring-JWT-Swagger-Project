@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/e13d25d6-ea4c-4695-a8e7-a5cf14764344)# Tresorory Management
+# Tresorory Management
 
 A comprehensive treasury management system designed to handle financial transactions securely and efficiently.
 
