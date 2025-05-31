@@ -1,124 +1,179 @@
-## 🚨 Cette Branche est dédiée au Front-End
-## 🚨 Aller Vers La Partie Back-End :
-[Accéder à la branche Back-End](https://github.com/Mostapha-El-Kaddaoui/Angular-Spring-JWT-Swagger-Project/tree/Back-End)
+# Angular-Spring-JWT-Swagger-Project
 
-## Ce projet a été réalisé en suivant un cours donné par le professeur Monsieur ![Mohamed Youssfi](https://github.com/mohamedYoussfi).
----
-# Tresorory Management Frontend (Angular)
-## Composantes Overview
-![image](https://github.com/user-attachments/assets/6aef8dff-e9c6-4752-8c1c-053da1eb23db)
-
----
-## Partie Front-End avec Angular
-
-Le dossier `src/app` contient toute la logique de l'application Angular. Voici une description des principaux dossiers et fichiers présents :
-
-### Composants (components)
-
-- **accounts/**  
-  Composant dédié à la gestion des comptes bancaires (affichage, opérations, etc.).  
-  Contient : HTML, CSS, TypeScript, et tests.
-
-- **admin-template/**  
-  Composant servant de modèle (template) pour la partie administration de l’application.  
-  Gère la mise en page et le design commun.
-
-- **change-password/**  
-  Composant pour permettre aux utilisateurs de modifier leur mot de passe.
-
-- **customers/**  
-  Composant dédié à la gestion des clients (affichage liste clients, détails, etc.).
-
-- **home/**  
-  Page d'accueil de l'application, souvent le premier écran visible après connexion.
-
-- **login/**  
-  Composant pour la gestion de l’authentification (formulaire de connexion).
-
-- **navbar/**  
-  Barre de navigation commune à toutes les pages.
-
-- **new-customer/**  
-  Formulaire pour créer un nouveau client.
-
-- **not-authorized/**  
-  Page affichée lorsqu’un utilisateur tente d’accéder à une ressource pour laquelle il n’a pas les droits.
-
-### Services (services)
-
-- **account.service.ts**  
-  Service pour gérer les appels API liés aux comptes bancaires.
-
-- **auth.service.ts**  
-  Service pour gérer l’authentification, les tokens JWT, etc.
-
-- **customer.service.ts**  
-  Service pour gérer les appels API liés aux clients.
-
-Chaque service a son fichier de test (`*.spec.ts`).
-
-### Gardiens (guards)
-
-- **authentication.guard.ts**  
-  Garde qui protège les routes nécessitant une connexion.
-
-- **authorization.guard.ts**  
-  Garde qui protège les routes selon les rôles/utilisateur.
-
-### Intercepteurs (interceptors)
-
-- **app-http.interceptor.ts**  
-  Intercepteur HTTP pour ajouter automatiquement le token d'authentification aux requêtes sortantes, gérer les erreurs globalement, etc.
-
-### Modèles (model)
-
-- **account.model.ts**  
-  Définition des interfaces/types pour les comptes.
-
-- **customer.model.ts**  
-  Définition des interfaces/types pour les clients.
-
-### Fichiers racines
-
-- **app.component.ts / html / css**  
-  Composant racine de l’application.
-
-- **app.routes.ts**  
-  Fichier de configuration des routes Angular (définit la navigation dans l’application).
-
-- **app.config.ts**  
-  Configuration générale de l’application (exemple : constantes, URL API, etc.).
-
-- **main.ts**  
-  Point d’entrée principal qui lance l’application Angular.
-
-- **index.html**  
-  Page HTML principale qui charge l’application Angular.
-
-- **styles.css**  
-  Styles globaux applicables à toute l’application.
+## Overview
+This project is a modern e-banking frontend built with Angular. It provides a secure, role-based interface for managing customers and accounts, with JWT authentication, route guards, and a clean UI using Tailwind CSS. The frontend communicates with a Spring Boot backend (see Back-End branch) via RESTful APIs.
 
 ---
 
-### 2.2. Interfaces
+## Table of Contents
+- [Project Structure](#project-structure)
+- [Models](#models)
+- [Services](#services)
+- [Security](#security)
+- [Guards](#guards)
+- [Interceptors](#interceptors)
+- [Components](#components)
+- [Routing](#routing)
+- [Web APIs](#web-apis)
+- [How to Run](#how-to-run)
 
-#### Hero Page 
-![image](https://github.com/user-attachments/assets/0c725ed4-33c3-4c05-a6e6-ab8c99e887f8)
+---
 
-#### Login Page  
-![image](https://github.com/user-attachments/assets/b625898b-768b-4d38-a16d-51ce43c264dd)
+## Project Structure
+```
+src/app/
+  accounts/           # Account management UI
+  admin-template/     # Admin layout
+  change-password/    # Change password UI
+  customers/          # Customer management UI
+  guards/             # Route guards (auth, role)
+  home/               # Home page
+  interceptors/       # HTTP interceptors
+  login/              # Login UI
+  model/              # TypeScript interfaces (Account, Customer)
+  navbar/             # Navigation bar
+  new-customer/       # New customer form
+  not-authorized/     # Not authorized page
+  services/           # Angular services (API, Auth)
+  app.component.*     # Root component
+  app.config.ts       # App-wide providers
+  app.routes.ts       # Angular routes
+```
 
-#### Change Password Interface  
-![image](https://github.com/user-attachments/assets/6a5fcd4c-f75a-45c3-8872-3f34bb663053)
+---
 
-#### Customer List, Search, and Delete  
-![image](https://github.com/user-attachments/assets/2bb1dcc4-5109-4f39-a7ac-db738c5e3fd2)
-![image](https://github.com/user-attachments/assets/129bdc33-8953-4da5-bd72-ca4638930ae6)
+## Models
+### `AccountDetails` (`model/account.model.ts`)
+- `accountId: string`
+- `balance: number`
+- `currentPage: number`
+- `totalPages: number`
+- `pageSize: number`
+- `accountOperationDTOS: AccountOperation[]`
 
-#### Create Customer Form  
-![image](https://github.com/user-attachments/assets/e5ab082d-73cb-44a0-a61b-3dbcf8bb8d2b)
-![image](https://github.com/user-attachments/assets/8c305035-0ea1-4d85-8ada-1ea73f138933)
+### `AccountOperation` (`model/account.model.ts`)
+- `id: number`
+- `operationDate: Date`
+- `amount: number`
+- `type: string`
+- `description: string`
 
-#### Accounts List and Operations Get 
-![image](https://github.com/user-attachments/assets/b9f081f4-6692-489b-a450-cf9433988434)
+### `Customer` (`model/customer.model.ts`)
+- `id: number`
+- `name: string`
+- `email: string`
+
+---
+
+## Services
+### `AccountService` (`services/account.service.ts`)
+- `getAccounts(): Observable<AccountDetails[]>` — List all accounts
+- `searchAccounts(accid: string, page: number, size: number): Observable<AccountDetails>` — Get account details and operations
+- `updateAccount(accountId: string, accountData: any): Observable<any>` — Update account info
+- `deleteAccount(id: any)` — (Not implemented)
+
+### `CustomerService` (`services/customer.service.ts`)
+- `getCustomers(): Observable<Customer[]>` — List all customers
+- `searchCustomers(keyword: string): Observable<Customer[]>` — Search customers by keyword
+- `saveCustomer(customer: Customer): Observable<Customer>` — Add a new customer
+- `deleteCustomer(id: number): Observable<any>` — Delete a customer
+
+### `AuthService` (`services/auth.service.ts`)
+- `login(username: string, password: string)` — Authenticate and get JWT
+- `loadProfile(data: any)` — Decode JWT, set user info
+- `logout()` — Clear session, redirect to login
+- `loadJwtFromLocalStorage()` — Restore session from localStorage
+
+---
+
+## Security
+- **JWT Authentication:**
+  - Login via `/auth/login` endpoint (POST, username/password)
+  - JWT token is stored in localStorage and attached to all API requests (except login)
+- **Role-based Authorization:**
+  - User roles are decoded from JWT (`scope` claim)
+  - Only users with `ADMIN` role can access certain routes (e.g., create customer)
+
+---
+
+## Guards
+### `AuthenticationGuard` (`guards/authentication.guard.ts`)
+- Protects routes that require authentication
+- Redirects to `/login` if not authenticated
+
+### `AuthorizationGuard` (`guards/authorization.guard.ts`)
+- Protects routes that require specific roles (e.g., `ADMIN`)
+- Redirects to `/admin/notauthorized` if role check fails
+
+---
+
+## Interceptors
+### `AppHttpInterceptor` (`interceptors/app-http.interceptor.ts`)
+- Attaches `Authorization: Bearer <token>` header to all outgoing HTTP requests (except login)
+- Handles 401 errors globally (logs out user)
+
+---
+
+## Components
+- **AppComponent:** Root component, loads user session
+- **NavbarComponent:** Navigation bar, shows user info, logout
+- **LoginComponent:** Login form, handles authentication
+- **HomeComponent:** Welcome page
+- **AdminTemplateComponent:** Layout for admin pages
+- **CustomersComponent:** List/search/delete customers
+- **NewCustomerComponent:** Add new customer form
+- **AccountsComponent:** List/search/update accounts, view operations
+- **ChangePasswordComponent:** (UI only, not implemented)
+- **NotAuthorizedComponent:** Shown when user lacks permissions
+
+---
+
+## Routing
+Defined in `app.routes.ts`:
+- `/home` — Home page
+- `/login` — Login page
+- `/admin` — Admin dashboard (protected)
+  - `/customers` — Customer management
+  - `/accounts` — Account management
+  - `/customers/new-customer` — Add customer (ADMIN only)
+  - `/notauthorized` — Not authorized page
+- `/changepassword` — Change password
+
+---
+
+## Web APIs (Backend Endpoints Consumed)
+- `POST /auth/login` — Authenticate user, returns JWT
+- `GET /customers` — List all customers
+- `GET /customers/search?keyword=...` — Search customers
+- `POST /customers` — Add new customer
+- `DELETE /customers/{id}` — Delete customer
+- `GET /accounts` — List all accounts
+- `GET /accounts/{accid}/pageoperations?page=...&size=...` — Get account details and operations
+- `PUT /accounts/{accountId}` — Update account
+
+---
+
+## How to Run
+1. Install dependencies:
+   ```sh
+   npm install
+   ```
+2. Start the Angular app:
+   ```sh
+   npm start
+   ```
+3. The app runs at [http://localhost:4200](http://localhost:4200)
+
+---
+
+## Notes
+- This frontend expects a backend running at `http://localhost:8085` (Spring Boot, see Back-End branch)
+- All API calls are made to this backend
+- JWT token is required for all API calls except login
+- UI is styled with Tailwind CSS
+
+---
+
+## License
+MIT
 

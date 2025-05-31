@@ -7,6 +7,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AccountService {
+  deleteAccount(id: any) {
+    throw new Error('Method not implemented.');
+  }
 
   apiUrl:string="http://localhost:8085";  
   constructor(private http:HttpClient) { }
@@ -16,5 +19,8 @@ export class AccountService {
   }
   searchAccounts(accid: string, page: number, size:number): Observable<AccountDetails> {
     return this.http.get<AccountDetails>(this.apiUrl+"/accounts/"+accid+"/pageoperations?page="+page+"&size="+size);
+  }
+  updateAccount(accountId: string, accountData: any): Observable<any> {
+    return this.http.put(this.apiUrl+"/accounts/"+accountId, accountData);
   }
 }
