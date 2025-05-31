@@ -1,6 +1,5 @@
 package ma.enset.tresorory.Service;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -208,4 +207,97 @@ public class BankAccountServiceImpl implements BankAccountService{
     }
 
 
+    @Override
+    public SavingAccountDTO updateSavingBankAccount(String accountId, double balance, double interestRate, Long customerId)
+            throws BankAccountNotFoundException, CustomerNotFoundException {
+
+        // Find the existing account
+        BankAccount bankAccount = bankAccountRepository.findById(accountId)
+                .orElseThrow(() -> new BankAccountNotFoundException("Bank Account not found"));
+
+        // Verify it's a saving account
+        if (!(bankAccount instanceof SavingAccount)) {
+            throw new IllegalArgumentException("Account is not a saving account");
+        }
+
+        // Find the customer if customerId is provided and different
+        Customer customer = null;
+        if (customerId != null && !bankAccount.getCustomer().getId().equals(customerId)) {
+            customer = customerRepository.findById(customerId)
+                    .orElseThrow(() -> new CustomerNotFoundException("Customer Not found"));
+        } else {
+            customer = bankAccount.getCustomer();
+        }
+
+        // Update the account
+        SavingAccount savingAccount = (SavingAccount) bankAccount;
+        savingAccount.setBalance(balance);
+        savingAccount.setDuration(interestRate);
+        savingAccount.setCustomer(customer);
+
+        // Save the updated account
+        SavingAccount savedAccount = bankAccountRepository.save(savingAccount);
+
+        // Convert to DTO and return
+        return bankAccountMapper.fromSavingAccount(savedAccount);
+    }
+    @Override
+    public CurrentAccountDTO updateCurrentBankAccount(String accountId, double balance, double overDraft, Long customerId)
+            throws BankAccountNotFoundException, CustomerNotFoundException {
+
+        // Find the existing account
+        BankAccount bankAccount = bankAccountRepository.findById(accountId)
+                .orElseThrow(() -> new BankAccountNotFoundException("Bank Account not found"));
+
+        // Verify it's a current account
+        if (!(bankAccount instanceof CurrentAccount)) {
+            throw new IllegalArgumentException("Account is not a current account");
+        }
+
+        // Find the customer if customerId is provided and different
+        Customer customer = null;
+        if (customerId != null && !bankAccount.getCustomer().getId().equals(customerId)) {
+            customer = customerRepository.findById(customerId)
+                    .orElseThrow(() -> new CustomerNotFoundException("Customer Not found"));
+        } else {
+            customer = bankAccount.getCustomer();
+        }
+
+        // Update the account
+        CurrentAccount currentAccount = (CurrentAccount) bankAccount;
+        currentAccount.setBalance(balance);
+        currentAccount.setOverDraft(overDraft);
+        currentAccount.setCustomer(customer);
+
+        // Save the updated account
+        CurrentAccount savedAccount = bankAccountRepository.save(currentAccount);
+
+        // Convert to DTO and return
+        return bankAccountMapper.fromCurrentAccount(savedAccount);
+    }
+
+    @Override
+    public BankAccountDTO updateBankAccount(String accountId, BankAccountDTO bankAccountDTO)
+            throws BankAccountNotFoundException, CustomerNotFoundException {
+
+        if (bankAccountDTO instanceof SavingAccountDTO) {
+            SavingAccountDTO savingDTO = (SavingAccountDTO) bankAccountDTO;
+            return updateSavingBankAccount(
+                    accountId,
+                    savingDTO.getBalance(),
+                    savingDTO.getDuration(),
+                    savingDTO.getCustomerDTO().getId()
+            );
+        } else if (bankAccountDTO instanceof CurrentAccountDTO) {
+            CurrentAccountDTO currentDTO = (CurrentAccountDTO) bankAccountDTO;
+            return updateCurrentBankAccount(
+                    accountId,
+                    currentDTO.getBalance(),
+                    currentDTO.getOverDraft(),
+                    currentDTO.getCustomerDTO().getId()
+            );
+        } else {
+            throw new IllegalArgumentException("Invalid account type");
+        }
+    }
 }

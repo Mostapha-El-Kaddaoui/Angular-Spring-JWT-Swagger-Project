@@ -35,6 +35,7 @@ public class TresororyApplication {
     public static void main(String[] args) {
         SpringApplication.run(TresororyApplication.class, args);
     }
+
     @Bean
     CommandLineRunner commandLineRunner(BankAccountService bankAccountService, CustomerRepository customerRepository){
         return args -> {

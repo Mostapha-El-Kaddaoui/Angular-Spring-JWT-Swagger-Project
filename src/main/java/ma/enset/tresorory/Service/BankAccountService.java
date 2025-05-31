@@ -1,5 +1,6 @@
 package ma.enset.tresorory.Service;
 
+import ma.enset.tresorory.Exceptions.BankAccountNotFoundException;
 import ma.enset.tresorory.Exceptions.CustomerNotFoundException;
 import ma.enset.tresorory.dto.*;
 
@@ -33,4 +34,12 @@ public interface BankAccountService {
     List<CustomerDTO> searchCustomers(String keyword);
 
 
+    SavingAccountDTO updateSavingBankAccount(String accountId, double balance, double interestRate, Long customerId)
+            throws BankAccountNotFoundException, CustomerNotFoundException;
+
+    CurrentAccountDTO updateCurrentBankAccount(String accountId, double balance, double overDraft, Long customerId)
+            throws BankAccountNotFoundException, CustomerNotFoundException;
+
+    BankAccountDTO updateBankAccount(String accountId, BankAccountDTO bankAccountDTO)
+            throws BankAccountNotFoundException, CustomerNotFoundException;
 }
