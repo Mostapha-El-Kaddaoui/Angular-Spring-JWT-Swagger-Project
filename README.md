@@ -2,7 +2,7 @@
 ## 🚨 Aller Vers La Partie Front-End :
 [Accéder à la branche Front-End](https://github.com/Mostapha-El-Kaddaoui/Angular-Spring-JWT-Swagger-Project/tree/Front-End)
 
-## Ce projet a été réalisé en suivant un cours donné par le professeur Monsieur ![Mohamed Youssfi](https://github.com/mohamedYoussfi).
+## Ce projet a été réalisé en suivant un cours donné par le professeur Monsieur [Mohamed Youssfi](https://github.com/mohamedYoussfi).
 
 # Tresorory Management Back-End
 ---
