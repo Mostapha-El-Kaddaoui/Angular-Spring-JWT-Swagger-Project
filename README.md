@@ -174,6 +174,4 @@ Defined in `app.routes.ts`:
 
 ---
 
-## License
-MIT
 
