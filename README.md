@@ -160,16 +160,24 @@ Defined in `app.routes.ts`:
 
 ---
 
-## How to Run
-1. Install dependencies:
-   ```sh
-   npm install
-   ```
-2. Start the Angular app:
-   ```sh
-   npm start
-   ```
-3. The app runs at [http://localhost:4200](http://localhost:4200)
+## Interfaces
+### Page d'Acceuil
+![image](https://github.com/user-attachments/assets/a53a0faf-2033-4a38-bf17-f5b8f7137a09)
+
+### Accounts Management
+![image](https://github.com/user-attachments/assets/3c26972d-1909-439c-949f-59e21e70f87f)
+
+## Customers Management
+![image](https://github.com/user-attachments/assets/d740cc96-b838-4090-8e10-392e1252a546)
+
+## Create Customer
+![image](https://github.com/user-attachments/assets/2a7bc9a9-633e-4fd3-855c-5ee39c59eb32)
+
+## Login Page
+![image](https://github.com/user-attachments/assets/61151503-c4c1-4e72-9fc6-d6b45b631d42)
+
+## Change Password
+![image](https://github.com/user-attachments/assets/78b757dd-2e22-4518-84e9-fec1c43b9f36)
 
 ---
 
