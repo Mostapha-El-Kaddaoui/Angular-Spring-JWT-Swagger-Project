@@ -1,0 +1,87 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black p-8">
+  <h1 class="text-4xl font-extrabold text-center text-indigo-400 mb-10">Dashboard</h1>
+  <!-- Widgets Row -->
+  <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-12">
+    <div class="bg-gradient-to-br from-blue-700 to-indigo-900 rounded-xl shadow-lg p-6 flex flex-col items-center">
+      <span class="text-5xl mb-2">👤</span>
+      <span class="text-lg text-indigo-100">Total Customers</span>
+      <span class="text-2xl font-bold text-white">{{ totalCustomers }}</span>
+    </div>
+    <div class="bg-gradient-to-br from-purple-700 to-pink-900 rounded-xl shadow-lg p-6 flex flex-col items-center">
+      <span class="text-5xl mb-2">💳</span>
+      <span class="text-lg text-indigo-100">Total Accounts</span>
+      <span class="text-2xl font-bold text-white">{{ totalAccounts }}</span>
+    </div>
+    <div class="bg-gradient-to-br from-green-700 to-emerald-900 rounded-xl shadow-lg p-6 flex flex-col items-center">
+      <span class="text-5xl mb-2">💰</span>
+      <span class="text-lg text-indigo-100">Total Balance</span>
+      <span class="text-2xl font-bold text-white">{{ totalBalance | currency }}</span>
+    </div>
+    <div class="bg-gradient-to-br from-yellow-600 to-orange-900 rounded-xl shadow-lg p-6 flex flex-col items-center">
+      <span class="text-5xl mb-2">📊</span>
+      <span class="text-lg text-indigo-100">Average Balance</span>
+      <span class="text-2xl font-bold text-white">{{ averageBalance | currency }}</span>
+    </div>
+    <div class="bg-gradient-to-br from-red-700 to-pink-900 rounded-xl shadow-lg p-6 flex flex-col items-center">
+      <span class="text-5xl mb-2">🏆</span>
+      <span class="text-lg text-indigo-100">Highest Balance</span>
+      <span class="text-2xl font-bold text-white">{{ highestBalance | currency }}</span>
+    </div>
+  </div>
+
+  <!-- Graphs and Lists Row -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col items-center w-full">
+      <h2 class="text-xl font-bold text-indigo-300 mb-4">Recently Added Accounts</h2>
+      <ul class="w-full divide-y divide-gray-700">
+        <li *ngFor="let acc of latestAccounts" class="py-2 flex justify-between items-center">
+          <span class="font-semibold text-indigo-200">{{ acc.accountId || acc.id }}</span>
+          <span class="text-green-400">{{ acc.balance | currency }}</span>
+          <span class="text-xs px-2 py-1 rounded bg-gray-700 text-white" *ngIf="acc.duration != null">SAVING</span>
+          <span class="text-xs px-2 py-1 rounded bg-gray-700 text-white" *ngIf="acc.overDraft != null && acc.duration == null">CURRENT</span>
+        </li>
+        <li *ngIf="latestAccounts.length === 0" class="py-2 text-gray-400 text-center">No recent accounts</li>
+      </ul>
+      <h2 class="text-xl font-bold text-indigo-300 mb-4 mt-8">Recently Added Customers</h2>
+      <ul class="w-full divide-y divide-gray-700">
+        <li *ngFor="let cust of latestCustomers" class="py-2 flex justify-between items-center">
+          <span class="font-semibold text-indigo-200">{{ cust.name }}</span>
+          <span class="text-gray-400">{{ cust.email }}</span>
+        </li>
+        <li *ngIf="latestCustomers.length === 0" class="py-2 text-gray-400 text-center">No recent customers</li>
+      </ul>
+    </div>
+    <div class="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col items-center">
+      <h2 class="text-xl font-bold text-indigo-300 mb-4">Account Types Distribution</h2>
+      <svg width="340" height="340" viewBox="0 0 340 340">
+        <circle r="150" cx="170" cy="170" fill="#e0e7ff" />
+        <path [attr.d]="describeArc(170,170,150,0,(currentAccountsPercent/100)*360)" fill="#6366f1" />
+        <text x="170" y="175" text-anchor="middle" fill="#fff" font-size="32">{{ currentAccountsPercent }}% Current</text>
+        <text x="170" y="205" text-anchor="middle" fill="#6366f1" font-size="22">{{ savingAccountsPercent }}% Saving</text>
+      </svg>
+      <div class="flex gap-4 mt-4">
+        <span class="flex items-center gap-1"><span class="w-4 h-4 bg-indigo-500 inline-block rounded-full"></span> Current</span>
+        <span class="flex items-center gap-1"><span class="w-4 h-4 bg-blue-200 inline-block rounded-full"></span> Saving</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Bar Graph Row -->
+  <div class="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col items-center mt-8 w-full">
+    <h2 class="text-xl font-bold text-indigo-300 mb-4">Balance by Account Type</h2>
+    <svg width="420" height="260" viewBox="0 0 420 260">
+      <g>
+        <rect x="70" y="60" width="100" [attr.height]="balancesByType.current / 500" fill="#6366f1" rx="12" />
+        <text x="120" y="50" text-anchor="middle" fill="#fff" font-size="22">Current</text>
+        <text x="120" y="80" text-anchor="middle" fill="#fff" font-size="18">{{ balancesByType.current | currency }}</text>
+        <rect x="250" y="60" width="100" [attr.height]="balancesByType.saving / 500" fill="#38bdf8" rx="12" />
+        <text x="300" y="50" text-anchor="middle" fill="#fff" font-size="22">Saving</text>
+        <text x="300" y="80" text-anchor="middle" fill="#fff" font-size="18">{{ balancesByType.saving | currency }}</text>
+      </g>
+    </svg>
+    <div class="flex gap-4 mt-2">
+      <span class="flex items-center gap-1"><span class="w-4 h-4 bg-indigo-500 inline-block rounded-full"></span> Current</span>
+      <span class="flex items-center gap-1"><span class="w-4 h-4 bg-sky-400 inline-block rounded-full"></span> Saving</span>
+    </div>
+  </div>
+</div>

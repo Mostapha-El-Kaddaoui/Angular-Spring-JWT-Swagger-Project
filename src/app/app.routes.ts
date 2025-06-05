@@ -9,20 +9,20 @@ import { AuthenticationGuard } from './guards/authentication.guard';
 import { AuthorizationGuard } from './guards/authorization.guard';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
     {path : "home", component: HomeComponent},
     {path : "login", component: LoginComponent},
     {path : "", redirectTo : "/login", pathMatch: "full"},
+    {path : "dashboard", component: DashboardComponent, canActivate: [AuthenticationGuard]},
     {path : "admin", component: AdminTemplateComponent, canActivate:[AuthenticationGuard],
     children:[
+        {path : "dashboard", component: DashboardComponent},
         {path : "customers", component: CustomersComponent},
         {path : "accounts", component: AccountsComponent},
         {path : "customers/new-customer", component: NewCustomerComponent, canActivate:[AuthorizationGuard], data:{role:'ADMIN'}},
         {path : "notauthorized", component: NotAuthorizedComponent},
     ]},
     {path : "changepassword", component: ChangePasswordComponent}
-
-
-
 ];
