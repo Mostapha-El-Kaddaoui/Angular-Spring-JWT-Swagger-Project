@@ -164,6 +164,9 @@ Defined in `app.routes.ts`:
 ### Page d'Acceuil
 ![image](https://github.com/user-attachments/assets/a53a0faf-2033-4a38-bf17-f5b8f7137a09)
 
+### Dashboard
+![image](https://github.com/user-attachments/assets/b7e44078-6e27-4337-b1f5-9136607aee34)
+
 ### Accounts Management
 ![image](https://github.com/user-attachments/assets/3c26972d-1909-439c-949f-59e21e70f87f)
 
